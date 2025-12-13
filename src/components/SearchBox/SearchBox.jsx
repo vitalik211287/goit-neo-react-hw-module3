@@ -10,7 +10,7 @@ function SearchBox() {
           <Form className={ css.form}>
               <label htmlFor="name" className={ css.label}>Find contacts by name</label>
         <Field name="name" className={css.field} />
-        <button type="submit" className={css.formBtn} >Send</button>
+        {/* <button type="submit" className={css.formBtn} >Send</button> */}
       </Form>
     </Formik>
   );
