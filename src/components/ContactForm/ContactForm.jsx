@@ -5,7 +5,7 @@ function ContactForm() {
   return (
     <Formik
       initialValues={{ name: "", number: "" }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values, actions) => {console.log(values); actions.resetForm();}}
     >
       <Form className={css.form}>
         <label htmlFor="name" className={css.label}>
