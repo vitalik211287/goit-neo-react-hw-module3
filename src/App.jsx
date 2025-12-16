@@ -13,7 +13,7 @@ function App() {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
   const [filter, setFilter] = useState("");
-
+console.log(contacts);
   const normalizedFilter = filter.toLowerCase().trim();
 
   const filteredContacts = contacts.filter((contact) =>
@@ -23,9 +23,9 @@ function App() {
   return (
     <div className="main">
       <h1 className="mainText">Phonebook</h1>
-      <ContactForm  onAddContact={setContacts} />
+      <ContactForm onAddContact={setContacts} />
       <SearchBox value={filter} onChange={setFilter} />
-      <ContactList contacts={filteredContacts} />
+      <ContactList contacts={filteredContacts} onAddContact={setContacts} />
     </div>
   );
 }
