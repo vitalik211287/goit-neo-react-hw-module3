@@ -1,11 +1,18 @@
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import css from "./ContactForm.module.css";
 import { nanoid } from "nanoid";
+import * as yup from "yup";
+
+const validationSchema = yup.object().shape({
+  name: yup.string().min(3).max(50).required(),
+  number: yup.string().min(3).max(50).required(),
+});
 
 function ContactForm({ onAddContact }) {
   return (
     <Formik
       initialValues={{ id: nanoid(), name: "", number: "" }}
+      validationSchema={validationSchema}
       onSubmit={(values, actions) => {
         onAddContact((prev) => [...prev, values]);
         actions.resetForm();
@@ -22,7 +29,7 @@ function ContactForm({ onAddContact }) {
           autoComplete="name"
           className={css.field}
         />
-
+        <ErrorMessage component="span" name="name" className={css.error} />
         <label htmlFor="number" className={css.label}>
           Number
         </label>
@@ -34,7 +41,7 @@ function ContactForm({ onAddContact }) {
           inputMode="tel"
           className={css.field}
         />
-
+        <ErrorMessage component="span" name="number" className={css.error} />
         <button type="submit" className={css.formBtn}>
           Add contact
         </button>
