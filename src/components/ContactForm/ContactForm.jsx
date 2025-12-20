@@ -11,10 +11,11 @@ const validationSchema = yup.object().shape({
 function ContactForm({ onAddContact }) {
   return (
     <Formik
-      initialValues={{ id: nanoid(), name: "", number: "" }}
+      initialValues={{ name: "", number: "" }}
       validationSchema={validationSchema}
       onSubmit={(values, actions) => {
-        onAddContact((prev) => [...prev, values]);
+        const newContact = { ...values, id: nanoid() };
+        onAddContact((prev) => [...prev, newContact]);
         actions.resetForm();
       }}
     >
@@ -30,6 +31,7 @@ function ContactForm({ onAddContact }) {
           className={css.field}
         />
         <ErrorMessage component="span" name="name" className={css.error} />
+
         <label htmlFor="number" className={css.label}>
           Number
         </label>
@@ -42,6 +44,7 @@ function ContactForm({ onAddContact }) {
           className={css.field}
         />
         <ErrorMessage component="span" name="number" className={css.error} />
+
         <button type="submit" className={css.formBtn}>
           Add contact
         </button>
